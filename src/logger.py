@@ -42,7 +42,7 @@ class Logger:
 
         self.init_log_name()
 
-        print header
+        print(header)
 
     def init_log_name(self):
         # change log file name
@@ -66,10 +66,10 @@ class Logger:
                 if self.new_line or log.startswith('\n'):
                     if log.startswith('\n'):
                         log = log.replace('\n', '')
-                        print '\n',
+                        print('\n', end=' ')
                     log = datetime.datetime.today().strftime(
                         '[ %Y-%m-%d %H:%m:%S ] ') + log
-                print log,
+                print(log, end=' ')
 
                 self.new_line = False
                 if self.log_temp:
@@ -82,7 +82,7 @@ class Logger:
                 return
 
             log = string
-            print log
+            print(log)
             if self.log_temp:
                 string = self.log_temp + string
                 self.log_temp = ''
@@ -91,7 +91,7 @@ class Logger:
             self.log_main.append([string.strip()])
 
         except Exception as e:
-            print 'Error while logging: %s' % (e)
+            print('Error while logging: %s' % (e))
 
     def backup(self):
         # backs up the log
@@ -105,11 +105,11 @@ class Logger:
                     log.write('\n')
 
         except Exception as e:
-            print 'Error backing up: %s' % (e)
+            print('Error backing up: %s' % (e))
 
         try:
             with open('cache/followlist.csv', 'wb') as backup:
                 w = writer(backup)
                 w.writerows(self.bucketUnfollow)
         except Exception as e:
-            print 'Error while saving backup follow list: %s' % (e)
+            print('Error while saving backup follow list: %s' % (e))
