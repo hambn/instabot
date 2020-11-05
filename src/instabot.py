@@ -389,7 +389,7 @@ class InstaBot:
                     1970,
                     1,
                     1)).total_seconds() < self.times['stop_bot']:
-                for action, enabled in self.enabled.items():
+                for action, enabled in list(self.enabled.items()):
                     if enabled:
                         tmp_time = self.times['start_bot']
                         while tmp_time < (
@@ -620,7 +620,7 @@ class InstaBot:
                             self.banned['400'] = 0
                         # small break
                         sleep_time = randint(20, 50)
-                        print '\n\t--- Delaying %s seconds ---' % (sleep_time)
+                        print('\n\t--- Delaying %s seconds ---' % (sleep_time))
                         sleep(sleep_time)
                     # in case there's an error and it keeps looping
                     if self.clean_up_loop_count > 1000:
@@ -648,7 +648,7 @@ class InstaBot:
                     break
                 # just to log the time
                 sleep_time = self.delays['unfollow'][self.day_counters['unfollow']]
-                print '\n\t--- Delaying %s seconds ---' % (sleep_time)
+                print('\n\t--- Delaying %s seconds ---' % (sleep_time))
                 sleep(sleep_time)
                 # in case there's an error and it keeps looping
                 if self.clean_up_loop_count > 1000:
@@ -782,7 +782,7 @@ class InstaBot:
         self.refill_bucket()
         self.loop_count += 1
         # run operations
-        for operation, enabled in self.enabled.items():
+        for operation, enabled in list(self.enabled.items()):
             if enabled:
                 if self.next_operation[operation] < (datetime.now() - datetime(1970, 1, 1)).total_seconds() \
                         and self.max_operation[operation] > self.day_counters[operation] \
@@ -809,18 +809,18 @@ class InstaBot:
             # add sleep time
             minim = min(
                 value for key,
-                value in self.next_operation.items() if self.enabled[key])
+                value in list(self.next_operation.items()) if self.enabled[key])
             sleep_time = minim - \
                 (datetime.now() - datetime(1970, 1, 1)).total_seconds()
             if sleep_time > 0:
-                print '\n\t--- Delaying %s seconds ---' % (sleep_time)
+                print('\n\t--- Delaying %s seconds ---' % (sleep_time))
                 sleep(sleep_time)
 
         if not internet_connection():
             raise ConnectionError
         # in case there's an error and it keeps looping
         if self.loop_count > 100:
-            print '\tDelaying 60 seconds'
+            print('\tDelaying 60 seconds')
             sleep(60)
 
     def refill_bucket(self):
@@ -903,11 +903,11 @@ class InstaBot:
             # give it some sleep time
             minim = min(
                 value for key,
-                value in self.next_operation.items() if self.enabled[key])
+                value in list(self.next_operation.items()) if self.enabled[key])
             sleep_time = minim - \
                 (datetime.now() - datetime(1970, 1, 1)).total_seconds()
             if sleep_time > 0:
-                print '\n\t--- Delaying %s seconds ---' % (sleep_time)
+                print('\n\t--- Delaying %s seconds ---' % (sleep_time))
                 sleep(sleep_time)
             return
 
