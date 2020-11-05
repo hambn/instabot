@@ -106,7 +106,7 @@ def media_by_tag(
                 n['node'], media_min_likes, media_max_likes, browser, media_url) for n in nodes]
             result['posts'] = [p for p in posts if p is not None]
     except Exception as e:
-        print '\nError in obtaining media by tag: %s' % (e)
+        print('\nError in obtaining media by tag: %s' % (e))
     return result
 
 
@@ -120,7 +120,7 @@ def return_sharedData(tree):
                 try:
                     return toJSON(a.text.replace(identifier, '')[:-1])
                 except Exception as e:
-                    print '\nError returning sharedData JSON: %s' % (e)
+                    print('\nError returning sharedData JSON: %s' % (e))
         except Exception as e:
             continue
     return None
@@ -136,7 +136,7 @@ def return_username(browser, media_url, code):
         if data is not None:
             return data['entry_data']['PostPage'][0]['graphql']['shortcode_media']['owner']['username']
     except Exception as e:
-        print '\nError obtaining username: %s' % (e)
+        print('\nError obtaining username: %s' % (e))
     return None
 
 
@@ -164,7 +164,7 @@ def return_feedData(tree):
                 try:
                     return toJSON(a.text.replace(identifier, '')[:-2])
                 except Exception as e:
-                    print '\nError returning sharedData JSON: %s' % (e)
+                    print('\nError returning sharedData JSON: %s' % (e))
         except Exception as e:
             continue
     return None
@@ -183,7 +183,7 @@ def news_feed_media(browser, url, user_id):
                 posts = [get_feed_node_post_data(n['node'], user_id) for n in nodes]
                 return [p for p in posts if p is not None]
     except Exception as e:
-        print '\nError getting new feed data: %s.' % (e)
+        print('\nError getting new feed data: %s.' % (e))
     return []
 
 
@@ -232,7 +232,7 @@ def check_user(browser, url, user):
             }
 
     except Exception as e:
-        print '\nError checking user: %s.' % (e)
+        print('\nError checking user: %s.' % (e))
 
     sleep(5 * random())
     return result
