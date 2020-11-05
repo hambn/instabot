@@ -32,7 +32,7 @@ def parse_config(path):
         raw = [line.strip() for line in open(path, 'r')]
         return json.loads(''.join(raw))
     except BaseException:
-        print 'Could not open config file, check parameters.'
+        print('Could not open config file, check parameters.')
 
 
 def main():
